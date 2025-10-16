@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gurdjieff Bot - Explore the Fourth Way</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gurdjieff Bot</h1>
+            <p class="subtitle">Explore the teachings of George Ivanovich Gurdjieff</p>
+        </header>
+
+        <div class="status-bar">
+            <div id="connection-status" class="status-item">
+                <span class="status-label">Status:</span>
+                <span id="status-text">Connecting...</span>
+            </div>
+            <div id="document-count" class="status-item">
+                <span class="status-label">Documents:</span>
+                <span id="doc-count">-</span>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <p>Welcome! I'm here to help you explore Gurdjieff's teachings. You can ask me about:</p>
+                        <ul>
+                            <li>The Fourth Way and its principles</li>
+                            <li>Self-observation and self-remembering</li>
+                            <li>The three centers (thinking, feeling, moving)</li>
+                            <li>Conscious suffering and voluntary efforts</li>
+                            <li>Any concepts from his writings</li>
+                        </ul>
+                        <p>What would you like to explore?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input type="text" id="message-input" placeholder="Ask about Gurdjieff's teachings..." disabled>
+                <button id="send-button" disabled>Send</button>
+            </div>
+        </div>
+
+        <div id="sources-panel" class="sources-panel hidden">
+            <h3>Sources</h3>
+            <div id="sources-content"></div>
+            <button id="close-sources">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
