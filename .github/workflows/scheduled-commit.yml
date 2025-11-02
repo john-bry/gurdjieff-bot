@@ -1,0 +1,47 @@
+name: Scheduled Commit
+
+on:
+  schedule:
+    # Runs at 9:00 AM Pacific Time every weekday (Monday-Friday)
+    # Pacific Time is UTC-8 (PST) or UTC-7 (PDT)
+    # Using 17:00 UTC to approximate 9am PT (works for PST, 10am during PDT)
+    # For true 9am PT year-round, use 16:00 UTC during PDT and 17:00 UTC during PST
+    # This uses 17:00 UTC (9am PST / 10am PDT)
+    - cron: '0 17 * * 1-5'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  scheduled-commit:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config --local user.email "${{ github.event.pusher.email || github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
+      
+      - name: Create or update file
+        run: |
+          # Create a timestamp file (or update existing one)
+          echo "Last updated: $(date)" > scheduled-update.txt
+          
+          # You can customize this to do whatever you need
+          # For example, update a log file, generate reports, etc.
+      
+      - name: Commit and push changes
+        run: |
+          git add .
+          
+          # Commit even if there are no changes (allow empty commits)
+          git commit --allow-empty -m "Automated commit: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
